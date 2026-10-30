@@ -10,6 +10,14 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     ciphertext = ""
     # PUT YOUR CODE HERE
+    for i, ch in enumerate(plaintext):
+        shift = ord(keyword[i % len(keyword)].upper()) - ord("A")
+        if "A" <= ch <= "Z":
+            ciphertext += chr((ord(ch) - ord("A") + shift) % 26 + ord("A"))
+        elif "a" <= ch <= "z":
+            ciphertext += chr((ord(ch) - ord("a") + shift) % 26 + ord("a"))
+        else:
+            ciphertext += ch
     return ciphertext
 
 
@@ -25,4 +33,12 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
     plaintext = ""
     # PUT YOUR CODE HERE
+    for i, ch in enumerate(ciphertext):
+        shift = ord(keyword[i % len(keyword)].upper()) - ord("A")
+        if "A" <= ch <= "Z":
+            plaintext += chr(shift + ord("A") - shift) % 26 + ord("A")
+        elif "a" <= ch <= "z":
+            plaintext += chr(shift + ord("a") - shift) % 26 + ord("a")
+        else:
+            plaintext += ch
     return plaintext
